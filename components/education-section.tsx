@@ -1,22 +1,22 @@
 "use client";
 
+import { useStagger } from "@/hooks/use-stagger";
 import { useEffect, useRef, useState } from "react";
 
 const achievements = [
   {
-    title: "Smart India Hackathon",
+    title: "Science India Fest",
     description:
-      "Finalist in national-level hackathon organized by Government of India",
+      "Finalist in national-level hackathon organized by Government of India as India Science Festival",
   },
   {
     title: "Competitive Programming",
-    description:
-      "Active participant on Codeforces, LeetCode, and CodeChef platforms",
+    description: "Codeforces expert with 1600+ rating.",
   },
   {
-    title: "Open Source",
+    title: "Drone Navigation Project",
     description:
-      "Contributor to various open-source projects and maintainer of personal libraries",
+      "Autonomous drone navigation using computer vision for obstacle detection. Featured in The Times of India",
   },
 ];
 
@@ -40,6 +40,8 @@ export function EducationSection() {
 
     return () => observer.disconnect();
   }, []);
+
+  const shouldStagger = useStagger(isVisible, 500);
 
   return (
     <section
@@ -84,16 +86,16 @@ export function EducationSection() {
               </div>
 
               <h3 className="font-sans text-2xl font-medium text-foreground lg:text-3xl">
-                IIIT Hyderabad
+                IIIT Lucknow
               </h3>
 
               <p className="mt-2 font-sans text-lg text-muted-foreground">
-                B.Tech in Computer Science & Engineering
+                B.Tech in Computer Science & Artificial Intelligence
               </p>
 
               <div className="mt-6 flex items-baseline gap-2">
                 <span className="font-sans text-4xl font-bold text-accent">
-                  9.0
+                  9.21
                 </span>
                 <span className="font-mono text-xs tracking-widest text-muted-foreground uppercase">
                   / 10 CGPA
@@ -101,9 +103,9 @@ export function EducationSection() {
               </div>
 
               <p className="mt-6 font-sans text-sm leading-relaxed text-muted-foreground">
-                Focused on algorithms, data structures, and software
-                engineering. Active member of the coding club and technical fest
-                organizing committee.
+                Focused on web dev, design, algorithms and data structures.
+                Active member of the GDSC and technical fest organizing
+                committee.
               </p>
             </div>
           </div>
@@ -129,7 +131,11 @@ export function EducationSection() {
                       ? "translate-x-0 opacity-100"
                       : "translate-x-8 opacity-0"
                   }`}
-                  style={{ transitionDelay: `${500 + index * 100}ms` }}
+                  style={{
+                    transitionDelay: shouldStagger
+                      ? `${500 + index * 100}ms`
+                      : "unset",
+                  }}
                 >
                   <div className="flex items-start gap-4">
                     <span className="mt-1 font-mono text-xs text-muted-foreground">

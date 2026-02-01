@@ -1,13 +1,13 @@
-"use client"
+"use client";
 
-import { useEffect, useState } from "react"
+import { useEffect, useState } from "react";
 
 export function HeroSection() {
-  const [mounted, setMounted] = useState(false)
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true)
-  }, [])
+    setMounted(true);
+  }, []);
 
   return (
     <section className="relative flex min-h-screen flex-col justify-between overflow-hidden px-6 pb-12 pt-32 lg:px-12">
@@ -50,8 +50,8 @@ export function HeroSection() {
           }`}
         >
           <p className="font-sans text-sm leading-relaxed text-muted-foreground">
-            Building elegant, scalable applications at the intersection of design and engineering.
-            Currently crafting digital experiences that matter.
+            Building elegant, scalable applications at the intersection of
+            design and engineering. Crafting digital experiences that matter.
           </p>
         </div>
       </div>
@@ -66,9 +66,7 @@ export function HeroSection() {
           <span className="font-mono text-[10px] tracking-widest text-muted-foreground uppercase">
             Based in
           </span>
-          <span className="font-sans text-sm text-foreground">
-            India
-          </span>
+          <span className="font-sans text-sm text-foreground">India</span>
         </div>
 
         <div className="flex flex-col gap-1">
@@ -82,10 +80,10 @@ export function HeroSection() {
 
         <div className="flex flex-col gap-1 lg:text-right">
           <span className="font-mono text-[10px] tracking-widest text-muted-foreground uppercase">
-            Open for
+            Open to
           </span>
           <span className="font-sans text-sm text-foreground">
-            Opportunities
+            interesting work
           </span>
         </div>
       </div>
@@ -97,5 +95,5 @@ export function HeroSection() {
         </div>
       </div>
     </section>
-  )
+  );
 }

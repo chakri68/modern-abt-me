@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import { useStagger } from "@/hooks/use-stagger";
 
 const socialLinks = [
   {
@@ -16,8 +17,8 @@ const socialLinks = [
   },
   {
     name: "Email",
-    url: "mailto:chakradharreddy.d@gmail.com",
-    label: "chakradharreddy.d@gmail.com",
+    url: "mailto:chakridevireddy69@gmail.com",
+    label: "chakridevireddy69@gmail.com",
   },
 ];
 
@@ -41,6 +42,8 @@ export function ContactSection() {
 
     return () => observer.disconnect();
   }, []);
+
+  const shouldStagger = useStagger(isVisible, 500);
 
   return (
     <section
@@ -83,14 +86,12 @@ export function ContactSection() {
             </h2>
 
             <p className="mt-8 max-w-md font-sans text-sm leading-relaxed text-muted-foreground">
-              {
-                "I'm always interested in hearing about new opportunities, interesting"
-              }
-              projects, or just having a chat about technology and design.
+              I’m always happy to talk about new opportunities, interesting
+              projects, or just nerd out about technology and design.
             </p>
 
             <Link
-              href="mailto:chakradharreddy.d@gmail.com"
+              href="mailto:chakridevireddy69@gmail.com"
               className="mt-8 inline-flex items-center gap-3 border border-accent bg-accent px-8 py-4 font-sans text-sm font-medium tracking-wide text-accent-foreground transition-all hover:bg-transparent hover:text-accent"
             >
               Get in Touch
@@ -108,6 +109,36 @@ export function ContactSection() {
                 />
               </svg>
             </Link>
+
+            <div
+              className={`mt-16 text-center transition-all delay-700 duration-700 ${
+                isVisible
+                  ? "translate-y-0 opacity-100"
+                  : "translate-y-8 opacity-0"
+              }`}
+            >
+              <Link
+                href="https://chakri68.github.io/resume/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 border border-foreground/20 px-6 py-3 font-mono text-xs tracking-widest text-foreground uppercase transition-all hover:border-accent hover:text-accent"
+              >
+                See my resume
+                <svg
+                  className="h-3 w-3"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M7 17L17 7M17 7H7M17 7v10"
+                  />
+                </svg>
+              </Link>
+            </div>
           </div>
 
           {/* Right - Links */}
@@ -138,7 +169,11 @@ export function ContactSection() {
                       ? "translate-x-0 opacity-100"
                       : "translate-x-8 opacity-0"
                   }`}
-                  style={{ transitionDelay: `${500 + index * 100}ms` }}
+                  style={{
+                    transitionDelay: shouldStagger
+                      ? `${500 + index * 100}ms`
+                      : "unset",
+                  }}
                 >
                   <div>
                     <span className="font-sans text-lg font-medium text-foreground transition-colors group-hover:text-accent">
@@ -174,7 +209,7 @@ export function ContactSection() {
           }`}
         >
           <p className="font-mono text-[10px] tracking-widest text-muted-foreground uppercase">
-            © 2024 Chakradhar Reddy Devireddy
+            © 2026 Chakradhar Reddy Devireddy
           </p>
 
           <p className="font-mono text-[10px] tracking-widest text-muted-foreground uppercase">

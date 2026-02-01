@@ -2,39 +2,52 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import { useStagger } from "@/hooks/use-stagger";
 
 const experiences = [
   {
-    company: "Siemens EDA",
-    title: "R&D Software Engineer",
-    period: "Jul 2024 — Present",
+    company: "Even Healthcare",
+    title: "Software Development Engineer",
+    period: "Nov 2025 — Present",
     location: "Bengaluru, India",
     achievements: [
-      "Developing scalable software solutions for electronic design automation",
-      "Collaborating with cross-functional teams to deliver high-quality products",
-      "Implementing best practices in software engineering and code quality",
+      "Working on healthcare systems - from AI-powered call automation to internal tooling and performance-heavy frontend flows and generally trying to make complex internal tools less painful to use.",
     ],
   },
   {
-    company: "IIIT Hyderabad",
-    title: "Software Developer",
-    period: "Aug 2023 — Apr 2024",
-    location: "Hyderabad, India",
+    company: "Zomato",
+    title: "Software Development Engineer",
+    period: "Jul 2025 — Oct 2025",
+    location: "Gurugram, India",
     achievements: [
-      "Built and maintained VLABS virtual labs platform serving 1M+ students",
-      "Developed reusable UI components using React and TypeScript",
-      "Optimized performance and improved user experience metrics",
+      "Worked on delivery logistics and internal tooling —-automating onboarding flows, ticketing systems, and large-scale operational pipelines (like GPS pings ingestion from delivery agents).",
     ],
   },
   {
-    company: "Piramal Finance",
+    company: "Zomato",
     title: "Software Engineering Intern",
-    period: "May 2023 — Jul 2023",
-    location: "Mumbai, India",
+    period: "Jan 2025 — Jun 2025",
+    location: "Gurugram, India",
     achievements: [
-      "Developed internal tools improving operational efficiency by 40%",
-      "Built RESTful APIs and integrated third-party services",
-      "Participated in agile development cycles and code reviews",
+      "Interned on core engineering systems - frontend refactors in TypeScript, high-throughput backend services in Go, and large data pipelines.",
+    ],
+  },
+  {
+    company: "Shinpo Engineering Pvt. Ltd.",
+    title: "Backend Developer Intern",
+    period: "Dec 2023 — Apr 2024",
+    location: "Remote, Singapore",
+    achievements: [
+      "Backend and infra work - building and scaling a Strapi-based ERM, containerizing services on AWS, and tuning performance across APIs and frontend systems.",
+    ],
+  },
+  {
+    company: "WCARL — IIIT Lucknow",
+    title: "Full-Stack Web Developer Intern",
+    period: "Oct 2022 — Mar 2023",
+    location: "Lucknow, India",
+    achievements: [
+      "Built and maintained a web portal and dashboards for automating and monitoring tax docs processing for UP Commercial Tax Dept., using Next.js, MSSQL, and automated PDF ingestion workflows.",
     ],
   },
 ];
@@ -60,6 +73,8 @@ export function ExperienceSection() {
 
     return () => observer.disconnect();
   }, []);
+
+  const shouldStagger = useStagger(isVisible, 500);
 
   return (
     <section
@@ -87,13 +102,17 @@ export function ExperienceSection() {
         <div className="space-y-0">
           {experiences.map((exp, index) => (
             <div
-              key={exp.company}
+              key={index}
               className={`group border-t border-border transition-all duration-700 ${
                 isVisible
                   ? "translate-y-0 opacity-100"
                   : "translate-y-12 opacity-0"
               }`}
-              style={{ transitionDelay: `${200 + index * 100}ms` }}
+              style={{
+                transitionDelay: shouldStagger
+                  ? `${200 + index * 100}ms`
+                  : "unset",
+              }}
               onMouseEnter={() => setHoveredIndex(index)}
               onMouseLeave={() => setHoveredIndex(null)}
             >
@@ -158,7 +177,7 @@ export function ExperienceSection() {
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 font-mono text-xs tracking-widest text-muted-foreground uppercase transition-colors hover:text-accent"
           >
-            View full experience on LinkedIn
+            Professional me is on LinkedIn - say hi
             <svg
               className="h-3 w-3"
               fill="none"

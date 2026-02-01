@@ -2,38 +2,39 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import { useStagger } from "@/hooks/use-stagger";
 
 const projects = [
   {
-    name: "Portfolio V2",
+    name: "Node Utils",
     description:
-      "A minimalist portfolio website built with Next.js and Tailwind CSS, featuring smooth animations and a focus on typography.",
-    url: "https://github.com/chakri68",
-    tech: ["Next.js", "TypeScript", "Tailwind"],
+      "A personal playground for low-level Node.js - worker-thread abstractions for real multithreading, geohashes, semaphores, and other things I built because I was curious how they actually work.",
+    url: "https://github.com/chakri68/systems-node",
+    tech: ["TypeScript", "Node.js"],
     number: "01",
   },
   {
-    name: "Virtual Labs",
+    name: "CodeCollab",
     description:
-      "Educational platform serving 1M+ students with interactive virtual laboratory experiments for science and engineering courses.",
-    url: "https://github.com/chakri68",
-    tech: ["React", "Node.js", "MongoDB"],
+      "A real-time collaborative IDE I built to see how far I could push live editing - powered by Next.js, WebSockets, and OT, with 20+ users syncing without stepping on each other.",
+    url: "https://github.com/chakri68/codeCollab",
+    tech: ["Next.js", "WebRTC", "JavaScript"],
     number: "02",
   },
   {
-    name: "Code Editor",
+    name: "get-proctored.ai",
     description:
-      "A web-based code editor with syntax highlighting, multiple language support, and real-time collaboration features.",
-    url: "https://github.com/chakri68",
-    tech: ["TypeScript", "Monaco", "WebSocket"],
+      "An AI-powered exam proctoring system using TensorFlow and MediaPipe - reduced false positives by ~30% with smarter rules and real-time face/eye tracking. Started as a uni project, ended up actually being used by professors.",
+    url: "https://github.com/chakri68/get-proctered-public",
+    tech: ["Python", "TensorFlow", "MediaPipe"],
     number: "03",
   },
   {
-    name: "CLI Tools",
+    name: "Pixel Drawing Simulator",
     description:
-      "Collection of command-line utilities for developer productivity, including file management and project scaffolding.",
-    url: "https://github.com/chakri68",
-    tech: ["Node.js", "Commander", "Chalk"],
+      "An interactive canvas tool for exploring pixel-level algorithms like Bresenham, flood-fill, and more. Built this so I could actually see how they behave on a real machine, not just on paper.",
+    url: "https://github.com/chakri68/pixel-drawing-sim",
+    tech: ["TypeScript", "Canvas", "Webpack"],
     number: "04",
   },
 ];
@@ -58,6 +59,8 @@ export function ProjectsSection() {
 
     return () => observer.disconnect();
   }, []);
+
+  const shouldStagger = useStagger(isVisible, 500);
 
   return (
     <section
@@ -87,9 +90,10 @@ export function ProjectsSection() {
             isVisible ? "translate-y-0 opacity-100" : "translate-y-12 opacity-0"
           }`}
         >
-          <h2 className="font-sans text-2xl font-medium leading-tight tracking-tight text-foreground lg:text-4xl text-balance">
-            Selected work and side projects that showcase my{" "}
-            <span className="text-accent">technical capabilities</span>
+          <h2 className="font-sans text-2xl font-medium leading-tight tracking-tight text-foreground lg:text-4xl text-balance w-max">
+            Some things I’ve <span className="text-accent">built.</span> <br />
+            Some problems I’ve enjoyed{" "}
+            <span className="text-accent">overthinking.</span>
           </h2>
         </div>
 
@@ -108,10 +112,14 @@ export function ProjectsSection() {
                   ? "translate-y-0 opacity-100"
                   : "translate-y-16 opacity-0"
               }`}
-              style={{ transitionDelay: `${300 + index * 100}ms` }}
+              style={{
+                transitionDelay: shouldStagger
+                  ? `${300 + index * 100}ms`
+                  : "unset",
+              }}
             >
               {/* Project number */}
-              <span className="absolute right-8 top-8 font-mono text-6xl font-bold text-border transition-colors group-hover:text-accent/20 lg:text-8xl">
+              <span className="absolute right-8 top-8 font-mono text-6xl font-bold text-border transition-colors group-hover:text-accent/20 lg:text-8xl duration-500">
                 {project.number}
               </span>
 
@@ -129,7 +137,7 @@ export function ProjectsSection() {
                 </div>
 
                 {/* Title */}
-                <h3 className="mb-4 font-sans text-2xl font-medium text-foreground transition-colors group-hover:text-accent lg:text-3xl">
+                <h3 className="mb-4 font-sans text-2xl font-medium text-foreground transition-colors group-hover:text-accent lg:text-3xl duration-500">
                   {project.name}
                 </h3>
 
@@ -139,7 +147,7 @@ export function ProjectsSection() {
                 </p>
 
                 {/* Arrow */}
-                <div className="mt-8 flex items-center gap-2 font-mono text-xs tracking-widest text-muted-foreground transition-colors group-hover:text-accent">
+                <div className="mt-8 flex items-center gap-2 font-mono text-xs tracking-widest text-muted-foreground transition-colors group-hover:text-accent duration-500">
                   View Project
                   <svg
                     className="h-3 w-3 transition-transform group-hover:translate-x-1"
@@ -167,12 +175,12 @@ export function ProjectsSection() {
           }`}
         >
           <Link
-            href="https://github.com/chakri68"
+            href="https://github.com/chakri68?tab=repositories"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 border border-foreground/20 px-6 py-3 font-mono text-xs tracking-widest text-foreground uppercase transition-all hover:border-accent hover:text-accent"
           >
-            View all projects on GitHub
+            See everything on GitHub
             <svg
               className="h-3 w-3"
               fill="none"
