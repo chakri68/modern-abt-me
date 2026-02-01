@@ -11,7 +11,10 @@ export function HeroSection() {
   }, []);
 
   return (
-    <section className="relative flex min-h-screen flex-col justify-between overflow-hidden px-6 pb-12 pt-32 lg:px-12 snap-center snap-always">
+    <section
+      id="hero"
+      className="relative flex min-h-screen flex-col justify-between overflow-hidden px-6 pb-12 pt-32 lg:px-12 snap-center snap-always"
+    >
       {/* Large typographic name */}
       <div className="relative z-10 flex-1">
         <div
@@ -36,12 +39,12 @@ export function HeroSection() {
           </h1>
 
           {/* Decorative line */}
-          <div
+          {/* <div
             className={`absolute -right-6 top-1/2 hidden h-px w-48 -translate-y-1/2 bg-border transition-all delay-500 duration-1000 lg:block ${
               mounted ? "scale-x-100 opacity-100" : "scale-x-0 opacity-0"
             }`}
             style={{ transformOrigin: "left" }}
-          />
+          /> */}
         </div>
 
         {/* Subtitle positioned asymmetrically */}

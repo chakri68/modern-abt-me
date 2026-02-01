@@ -6,11 +6,13 @@ import { SkillsSection } from "@/components/skills-section";
 import { EducationSection } from "@/components/education-section";
 import { ContactSection } from "@/components/contact-section";
 import { Navigation } from "@/components/navigation";
+import { ScrollIndicator } from "@/components/scroll-indicator";
 
 export default function ResumePage() {
   return (
     <main className="min-h-screen bg-background text-foreground snap-y snap-proximity scroll-smooth">
       <Navigation />
+      <ScrollIndicator />
       <HeroSection />
       <AboutSection />
       <ExperienceSection />
