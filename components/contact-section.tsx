@@ -206,7 +206,7 @@ export function ContactSection() {
 
         {/* Footer */}
         <div
-          className={`mt-32 flex flex-col items-center justify-between gap-4 border-t border-border pt-8 lg:flex-row transition-all delay-700 duration-700 ${
+          className={`mt-32 grid grid-rows-3 items-center justify-between gap-4 border-t border-border pt-8 lg:grid-cols-3 lg:grid-rows-none transition-all delay-700 duration-700 ${
             isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
           }`}
         >
@@ -214,14 +214,14 @@ export function ContactSection() {
             © 2026 Chakradhar Reddy Devireddy
           </p>
 
-          <p className="font-mono text-[10px] tracking-widest text-muted-foreground uppercase">
+          <p className="font-mono text-[10px] tracking-widest text-muted-foreground uppercase text-left lg:text-center">
             Crafted with care
           </p>
 
           <button
             type="button"
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            className="flex items-center gap-2 font-mono text-[10px] tracking-widest text-muted-foreground uppercase transition-colors hover:text-accent"
+            className="flex items-center gap-2 font-mono text-[10px] tracking-widest text-muted-foreground uppercase transition-colors hover:text-accent text-right lg:justify-end"
           >
             Back to top
             <svg
