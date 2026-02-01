@@ -90,42 +90,14 @@ export function ContactSection() {
               projects, or just nerd out about technology and design.
             </p>
 
-            <Link
-              href="mailto:chakridevireddy69@gmail.com"
-              className="mt-8 inline-flex items-center gap-3 border border-accent bg-accent px-8 py-4 font-sans text-sm font-medium tracking-wide text-accent-foreground transition-all hover:bg-transparent hover:text-accent"
-            >
-              Get in Touch
-              <svg
-                className="h-4 w-4"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M17 8l4 4m0 0l-4 4m4-4H3"
-                />
-              </svg>
-            </Link>
-
-            <div
-              className={`mt-16 text-center transition-all delay-700 duration-700 ${
-                isVisible
-                  ? "translate-y-0 opacity-100"
-                  : "translate-y-8 opacity-0"
-              }`}
-            >
+            <div className="flex flex-col w-max">
               <Link
-                href="https://chakri68.github.io/resume/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 border border-foreground/20 px-6 py-3 font-mono text-xs tracking-widest text-foreground uppercase transition-all hover:border-accent hover:text-accent"
+                href="mailto:chakridevireddy69@gmail.com"
+                className="mt-8 inline-flex items-center gap-3 border border-accent bg-accent px-12 py-4 w-full font-sans text-sm font-medium tracking-wide text-accent-foreground transition-all hover:bg-transparent hover:text-accent"
               >
-                See my resume
+                Get in Touch
                 <svg
-                  className="h-3 w-3"
+                  className="h-4 w-4"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -134,10 +106,40 @@ export function ContactSection() {
                     strokeLinecap="round"
                     strokeLinejoin="round"
                     strokeWidth={2}
-                    d="M7 17L17 7M17 7H7M17 7v10"
+                    d="M17 8l4 4m0 0l-4 4m4-4H3"
                   />
                 </svg>
               </Link>
+
+              <div
+                className={`mt-4 transition-all delay-700 duration-700 w-full ${
+                  isVisible
+                    ? "translate-y-0 opacity-100"
+                    : "translate-y-8 opacity-0"
+                }`}
+              >
+                <Link
+                  href="https://chakri68.github.io/resume/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 border border-foreground/20 px-6 py-3 font-mono text-xs tracking-widest text-foreground uppercase transition-all hover:border-accent hover:text-accent justify-center w-full"
+                >
+                  See my resume
+                  <svg
+                    className="h-3 w-3"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M7 17L17 7M17 7H7M17 7v10"
+                    />
+                  </svg>
+                </Link>
+              </div>
             </div>
           </div>
 
