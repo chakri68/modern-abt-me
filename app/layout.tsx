@@ -20,21 +20,21 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       {
-        url: "/favicon-32x32.png",
+        url: "/modern-abt-me/favicon-32x32.png",
         sizes: "32x32",
         rel: "icon",
       },
       {
-        url: "/favicon-16x16.png",
+        url: "/modern-abt-me/favicon-16x16.png",
         sizes: "16x16",
         rel: "icon",
       },
       {
-        url: "/site.webmanifest",
+        url: "/modern-abt-me/site.webmanifest",
         rel: "manifest",
       },
     ],
-    apple: "/apple-icon.png",
+    apple: "/modern-abt-me/apple-icon.png",
   },
 };
 
