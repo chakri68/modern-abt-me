@@ -1,5 +1,6 @@
 "use client";
 
+import { ChevronDown } from "lucide-react";
 import { useEffect, useState } from "react";
 
 export function HeroSection() {
@@ -73,8 +74,8 @@ export function HeroSection() {
           <span className="font-mono text-[10px] tracking-widest text-muted-foreground uppercase">
             Scroll to explore
           </span>
-          <div className="flex items-center gap-2">
-            <span className="h-8 w-px animate-pulse bg-accent" />
+          <div className="flex items-center gap-2 justify-center">
+            <ChevronDown className="w-5 h-5 text-primary animate-bounce relative top-2" />
           </div>
         </div>
 
