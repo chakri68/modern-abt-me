@@ -11,7 +11,7 @@ export function HeroSection() {
   }, []);
 
   return (
-    <section className="relative flex min-h-screen flex-col justify-between overflow-hidden px-6 pb-12 pt-32 lg:px-12">
+    <section className="relative flex min-h-screen flex-col justify-between overflow-hidden px-6 pb-12 pt-32 lg:px-12 snap-center snap-always">
       {/* Large typographic name */}
       <div className="relative z-10 flex-1">
         <div

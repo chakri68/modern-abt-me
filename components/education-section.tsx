@@ -47,7 +47,7 @@ export function EducationSection() {
     <section
       ref={sectionRef}
       id="education"
-      className="relative px-6 py-32 lg:px-12"
+      className="relative px-6 py-32 lg:px-12 snap-center snap-always"
     >
       <div className="mx-auto max-w-7xl">
         {/* Section label */}

@@ -27,7 +27,7 @@ export function AboutSection() {
     <section
       ref={sectionRef}
       id="about"
-      className="relative min-h-screen px-6 py-32 lg:px-12"
+      className="relative min-h-screen px-6 py-32 lg:px-12 snap-center snap-always"
     >
       <div className="mx-auto max-w-7xl">
         {/* Section label */}
