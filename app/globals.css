@@ -136,4 +136,6 @@
 
 html {
   cursor: default;
+  scrollbar-color: grey transparent;
+  scrollbar-width: thin;
 }
