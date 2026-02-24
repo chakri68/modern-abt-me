@@ -103,9 +103,9 @@ export function EducationSection() {
               </div>
 
               <p className="mt-6 font-sans text-sm leading-relaxed text-muted-foreground">
-                Focused on web dev, design, algorithms and data structures.
-                Active member of the GDSC and technical fest organizing
-                committee.
+                Focused on web dev, machine learning, algorithms and data
+                structures. Active member of the GDSC and technical fest
+                organizing committee.
               </p>
             </div>
           </div>

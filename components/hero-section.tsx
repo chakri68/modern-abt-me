@@ -55,7 +55,7 @@ export function HeroSection() {
         >
           <p className="font-sans text-sm leading-relaxed text-muted-foreground">
             Building elegant, scalable applications at the intersection of
-            design and engineering. Crafting digital experiences that matter.
+            design and engineering.
           </p>
         </div>
       </div>
@@ -87,7 +87,7 @@ export function HeroSection() {
             Open to
           </span>
           <span className="font-sans text-sm text-foreground">
-            interesting work
+            Interesting work
           </span>
         </div>
       </div>

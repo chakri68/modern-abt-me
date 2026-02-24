@@ -20,7 +20,7 @@ const experiences = [
     period: "Jul 2025 — Oct 2025",
     location: "Gurugram, India",
     achievements: [
-      "Worked on delivery logistics and internal tooling —-automating onboarding flows, ticketing systems, and large-scale operational pipelines (like GPS pings ingestion from delivery agents).",
+      "Worked on delivery logistics and internal tooling, automating onboarding flows, ticketing systems, and large-scale operational pipelines (like GPS pings ingestion from delivery agents).",
     ],
   },
   {

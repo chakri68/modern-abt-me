@@ -81,9 +81,9 @@ export function SkillsSection() {
               Technologies I work with
             </h2>
             <p className="mt-6 font-sans text-sm leading-relaxed text-muted-foreground">
-              They say tools don’t make the craftsman — but I still enjoy
-              collecting good ones. Always learning new tech, while staying
-              dangerously deep in TypeScript.
+              They say tools don’t make the craftsman, but I still enjoy
+              collecting good ones. Always learning new tech, while still
+              enjoying the classics.
             </p>
           </div>
 

@@ -76,7 +76,7 @@ export function AboutSection() {
             </p>
             <p className="font-sans text-sm leading-relaxed text-muted-foreground">
               From backend engineering to user experience, I try to create
-              software that stays out of the way and quietly does its job well —
+              software that stays out of the way and quietly does its job well,
               but stands out when it needs to.
             </p>
             <div className="mt-4 flex flex-col gap-2">

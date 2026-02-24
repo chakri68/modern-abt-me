@@ -180,7 +180,7 @@ export function ProjectsSection() {
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 border border-foreground/20 px-6 py-3 font-mono text-xs tracking-widest text-foreground uppercase transition-all hover:border-accent hover:text-accent"
           >
-            See everything on GitHub
+            Visit my Github to see more
             <svg
               className="h-3 w-3"
               fill="none"

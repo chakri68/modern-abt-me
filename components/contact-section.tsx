@@ -221,7 +221,7 @@ export function ContactSection() {
           <button
             type="button"
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            className="flex items-center gap-2 font-mono text-[10px] tracking-widest text-muted-foreground uppercase transition-colors hover:text-accent text-right lg:justify-end"
+            className="flex items-center gap-2 font-mono text-[10px] tracking-widest text-muted-foreground uppercase transition-colors hover:text-accent text-right lg:justify-end cursor-pointer"
           >
             Back to top
             <svg
