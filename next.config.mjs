@@ -7,8 +7,8 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-  basePath: process.env.NODE_ENV === "production" ? "/modern-abt-me" : "",
-  assetPrefix: process.env.NODE_ENV === "production" ? "/modern-abt-me" : "",
+  basePath: "",
+  assetPrefix: "",
 };
 
 export default nextConfig;

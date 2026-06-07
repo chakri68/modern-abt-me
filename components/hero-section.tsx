@@ -54,8 +54,7 @@ export function HeroSection() {
           }`}
         >
           <p className="font-sans text-sm leading-relaxed text-muted-foreground">
-            Building elegant, scalable applications at the intersection of
-            design and engineering.
+            Building elegant, scalable applications.
           </p>
         </div>
       </div>
