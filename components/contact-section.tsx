@@ -49,7 +49,7 @@ export function ContactSection() {
     <section
       ref={sectionRef}
       id="contact"
-      className="relative bg-card px-6 py-32 lg:px-12 snap-center snap-always"
+      className="relative bg-card px-6 py-10 lg:px-12 snap-center snap-always"
     >
       <div className="mx-auto max-w-7xl">
         {/* Section label */}
@@ -119,12 +119,41 @@ export function ContactSection() {
                 }`}
               >
                 <Link
-                  href="https://chakri68.github.io/resume/"
+                  href="https://resume.chakri.me/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 border border-foreground/20 px-6 py-3 font-mono text-xs tracking-widest text-foreground uppercase transition-all hover:border-accent hover:text-accent justify-center w-full"
                 >
                   See my resume
+                  <svg
+                    className="h-3 w-3"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M7 17L17 7M17 7H7M17 7v10"
+                    />
+                  </svg>
+                </Link>
+              </div>
+              <div
+                className={`mt-4 transition-all delay-700 duration-700 w-full ${
+                  isVisible
+                    ? "translate-y-0 opacity-100"
+                    : "translate-y-8 opacity-0"
+                }`}
+              >
+                <Link
+                  href="https://gameboy.chakri.me/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 border border-foreground/20 px-6 py-3 font-mono text-xs tracking-widest text-foreground uppercase transition-all hover:border-accent hover:text-accent justify-center w-full"
+                >
+                  See my projects
                   <svg
                     className="h-3 w-3"
                     fill="none"
