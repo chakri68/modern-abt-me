@@ -66,7 +66,7 @@ export function ProjectsSection() {
     <section
       ref={sectionRef}
       id="projects"
-      className="relative px-6 py-32 lg:px-12 snap-center snap-always"
+      className="relative px-6 py-24 lg:px-12 lg:py-32 snap-center snap-always"
     >
       <div className="mx-auto max-w-7xl">
         {/* Section label */}
@@ -90,7 +90,7 @@ export function ProjectsSection() {
             isVisible ? "translate-y-0 opacity-100" : "translate-y-12 opacity-0"
           }`}
         >
-          <h2 className="font-sans text-2xl font-medium leading-tight tracking-tight text-foreground lg:text-4xl text-balance w-max">
+          <h2 className="font-sans text-2xl font-medium leading-tight tracking-tight text-foreground lg:text-4xl text-balance lg:w-max">
             Some things I’ve <span className="text-accent">built.</span> <br />
             Some problems I’ve enjoyed{" "}
             <span className="text-accent">overthinking.</span>

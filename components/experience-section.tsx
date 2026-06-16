@@ -80,7 +80,7 @@ export function ExperienceSection() {
     <section
       ref={sectionRef}
       id="experience"
-      className="relative bg-card px-6 py-32 lg:px-12 snap-center snap-always"
+      className="relative bg-card px-6 py-24 lg:px-12 lg:py-32 snap-center snap-always"
     >
       <div className="mx-auto max-w-7xl">
         {/* Section label */}
