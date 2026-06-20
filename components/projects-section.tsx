@@ -37,6 +37,14 @@ const projects = [
     tech: ["TypeScript", "Canvas", "Webpack"],
     number: "04",
   },
+  {
+    name: "Life Sim",
+    description:
+      "A configurable cellular-automaton playground that pushes Conway's Game of Life way past the basics - totalistic rules, an agent-based ecosystem, Gray-Scott reaction-diffusion, and custom per-cell JS. Typed-array sim loops, a pan/zoom canvas, and whole universes encoded into shareable URLs, all in ~17KB gzipped.",
+    url: "https://github.com/chakri68/life-sim",
+    tech: ["TypeScript", "Vite", "Canvas"],
+    number: "05",
+  },
 ];
 
 export function ProjectsSection() {
@@ -106,7 +114,7 @@ export function ProjectsSection() {
               target="_blank"
               rel="noopener noreferrer"
               className={`group relative overflow-hidden border border-border bg-card p-8 transition-all duration-500 hover:border-accent/50 lg:p-12 ${
-                index % 3 === 0 ? "lg:col-span-2" : ""
+                index === 0 ? "lg:col-span-2" : ""
               } ${
                 isVisible
                   ? "translate-y-0 opacity-100"
