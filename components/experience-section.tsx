@@ -8,7 +8,7 @@ const experiences = [
   {
     company: "Even Healthcare",
     title: "Software Development Engineer",
-    period: "Nov 2025 — Present",
+    period: "Oct 2025 — Present",
     location: "Bengaluru, India",
     achievements: [
       "Working on healthcare systems - from AI-powered call automation to internal tooling and performance-heavy frontend flows and generally trying to make complex internal tools less painful to use.",
@@ -36,7 +36,7 @@ const experiences = [
     company: "Shinpo Engineering Pvt. Ltd.",
     title: "Backend Developer Intern",
     period: "Dec 2023 — Apr 2024",
-    location: "Remote, Singapore",
+    location: "Remote",
     achievements: [
       "Backend and infra work - building and scaling a Strapi-based ERM, containerizing services on AWS, and tuning performance across APIs and frontend systems.",
     ],

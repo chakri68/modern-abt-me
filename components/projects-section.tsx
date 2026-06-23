@@ -16,7 +16,7 @@ const projects = [
   {
     name: "CodeCollab",
     description:
-      "A real-time collaborative IDE I built to see how far I could push live editing - powered by Next.js, WebSockets, and OT, with 20+ users syncing without stepping on each other.",
+      "A real-time collaborative IDE I built to see how far I could push live editing - powered by Next.js, WebSockets, and CRDTs, with 20+ users syncing without stepping on each other.",
     url: "https://github.com/chakri68/codeCollab",
     tech: ["Next.js", "WebRTC", "JavaScript"],
     number: "02",

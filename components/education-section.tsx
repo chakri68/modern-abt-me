@@ -81,7 +81,7 @@ export function EducationSection() {
 
               <div className="mb-2">
                 <span className="font-mono text-[10px] tracking-widest text-muted-foreground uppercase">
-                  2020 — 2024
+                  2021 — 2025
                 </span>
               </div>
 
