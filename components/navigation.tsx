@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
-import { Menu, X } from "lucide-react"
+import { Menu, X, ExternalLink } from "lucide-react"
 
 const navItems = [
   { label: "About", href: "#about" },
@@ -82,12 +82,24 @@ export function Navigation() {
           ))}
         </div>
 
-        <Link
-          href="#contact"
-          className="hidden border border-foreground/20 px-4 py-2 font-sans text-xs tracking-widest uppercase text-foreground transition-all hover:border-accent hover:text-accent md:inline-block"
-        >
-          Contact
-        </Link>
+        <div className="hidden items-center gap-3 md:flex">
+          <Link
+            href="#contact"
+            className="border border-foreground/20 px-4 py-2 font-sans text-xs tracking-widest uppercase text-foreground transition-all hover:border-accent hover:text-accent"
+          >
+            Contact
+          </Link>
+
+          <a
+            href="https://projects.chakri.me"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 border border-accent bg-accent px-4 py-2 font-sans text-xs tracking-widest uppercase text-accent-foreground transition-all hover:bg-accent/80"
+          >
+            Catalogue
+            <ExternalLink className="h-3 w-3" />
+          </a>
+        </div>
 
         {/* Mobile menu toggle */}
         <button
@@ -133,6 +145,17 @@ export function Navigation() {
           >
             Contact
           </Link>
+
+          <a
+            href="https://projects.chakri.me"
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => setMenuOpen(false)}
+            className="inline-flex items-center justify-center gap-2 border border-accent bg-accent px-4 py-3 font-sans text-xs tracking-widest uppercase text-accent-foreground transition-all hover:bg-accent/80"
+          >
+            Catalogue
+            <ExternalLink className="h-3 w-3" />
+          </a>
         </div>
       </div>
     </nav>
