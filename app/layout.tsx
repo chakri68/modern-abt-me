@@ -19,7 +19,7 @@ const description =
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Chakradhar Reddy — Software Engineer",
+    default: "Chakradhar Reddy · Software Engineer",
     template: "%s · Chakradhar Reddy",
   },
   description,
@@ -49,13 +49,13 @@ export const metadata: Metadata = {
     type: "website",
     url: siteUrl,
     siteName: "Chakradhar Reddy",
-    title: "Chakradhar Reddy — Software Engineer",
+    title: "Chakradhar Reddy · Software Engineer",
     description,
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Chakradhar Reddy — Software Engineer",
+    title: "Chakradhar Reddy · Software Engineer",
     description,
     creator: "@chakri681",
   },
