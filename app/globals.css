@@ -76,8 +76,8 @@
 }
 
 @theme inline {
-  --font-sans: var(--f-isans), system-ui, sans-serif;
-  --font-mono: var(--f-dmmono), ui-monospace, monospace;
+  --font-sans: var(--f-grotesk), system-ui, sans-serif;
+  --font-mono: var(--f-jbmono), ui-monospace, monospace;
   --font-iserif: var(--f-iserif), Georgia, serif;
   --font-isans: var(--f-isans), system-ui, sans-serif;
   --font-dmmono: var(--f-dmmono), ui-monospace, monospace;
@@ -152,12 +152,13 @@
 
    Every theme is rendered into the page; the one matching <html data-theme>
    is shown. The inline script in <head> sets data-theme before first paint.
-   Without JS we fall back on the OS colour scheme.
+   Without JS you get the classic one.
 --------------------------------------------------------------------------- */
 
 [data-theme-panel] {
   display: none;
 }
+html[data-theme="classic"] [data-theme-panel="classic"],
 html[data-theme="night"] [data-theme-panel="night"],
 html[data-theme="quarterly"] [data-theme-panel="quarterly"],
 html[data-theme="paperback"] [data-theme-panel="paperback"],
@@ -166,21 +167,42 @@ html[data-theme="changelog"] [data-theme-panel="changelog"],
 html[data-theme="zine"] [data-theme-panel="zine"],
 html[data-theme="encyclopaedia"] [data-theme-panel="encyclopaedia"],
 html[data-theme="letter"] [data-theme-panel="letter"],
-html:not([data-theme]) [data-theme-panel="quarterly"] {
+html:not([data-theme]) [data-theme-panel="classic"] {
   display: block;
 }
-@media (prefers-color-scheme: dark) {
-  html:not([data-theme]) [data-theme-panel="quarterly"] {
-    display: none;
-  }
-  html:not([data-theme]) [data-theme-panel="night"] {
-    display: block;
-  }
-}
-
 /* Tokens for the page ground and the theme switcher menu, one set per theme.
    The menu is portaled to <body>, so these have to live on <html>. */
 html,
+html[data-theme="classic"] {
+  --page-bg: oklch(0.08 0.01 250);
+  --ts-bg: oklch(0.12 0.01 250);
+  --ts-fg: oklch(0.95 0.01 90);
+  --ts-muted: oklch(0.6 0.01 90);
+  --ts-border: 1px solid oklch(0.22 0.01 250);
+  --ts-accent: oklch(0.85 0.06 75);
+  --ts-accent-fg: oklch(0.08 0.01 250);
+  --ts-font: var(--f-grotesk), sans-serif;
+  --ts-size: 12px;
+  --ts-transform: uppercase;
+  --ts-tracking: 0.1em;
+  --ts-radius: 0px;
+  --ts-shadow: 0 18px 50px -12px rgb(0 0 0 / 0.8);
+  --ts-hint-font: var(--f-jbmono), monospace;
+  --ts-hint-style: normal;
+  --ts-hint-size: 10px;
+  --selection: oklch(0.85 0.06 75 / 0.3);
+  /* the original snaps between sections */
+  scroll-snap-type: y proximity;
+}
+html:not([data-theme="classic"]) {
+  --ts-font: var(--f-dmmono), serif;
+  --ts-tracking: 0.06em;
+  --ts-hint-font: var(--f-iserif), serif;
+  --ts-hint-style: italic;
+  --ts-hint-size: 15px;
+  --ts-shadow: 0 18px 40px -18px rgb(26 23 20 / 0.35);
+  scroll-snap-type: none;
+}
 html[data-theme="quarterly"] {
   --page-bg: #f4efe6;
   --ts-bg: #f4efe6;

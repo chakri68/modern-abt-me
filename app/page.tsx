@@ -1,4 +1,5 @@
 import { ThemeStage } from "@/components/theme-stage";
+import { ClassicTheme } from "@/themes/classic";
 import { NightTheme } from "@/themes/night";
 import { QuarterlyTheme } from "@/themes/quarterly";
 import { PaperbackTheme } from "@/themes/paperback";
@@ -12,6 +13,7 @@ export default function Page() {
   return (
     <ThemeStage
       panels={{
+        classic: <ClassicTheme />,
         night: <NightTheme />,
         quarterly: <QuarterlyTheme />,
         paperback: <PaperbackTheme />,

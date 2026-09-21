@@ -1,4 +1,5 @@
 export const THEMES = [
+  { id: "classic", name: "Classic", hint: "the original" },
   { id: "night", name: "Night edition", hint: "broadsheet, after dark" },
   { id: "quarterly", name: "Day edition", hint: "the magazine" },
   { id: "paperback", name: "Paperback", hint: "a novel, sort of" },
@@ -13,14 +14,22 @@ export type ThemeId = (typeof THEMES)[number]["id"];
 
 export const STORAGE_KEY = "chakri-theme";
 
-// Sections every theme exposes under the same ids, so a theme switch can
-// land the reader on the section they were already reading.
-export const SECTION_IDS = ["work", "projects", "stack", "contact"] as const;
+export const DEFAULT_THEME: ThemeId = "classic";
 
-// Runs before first paint (inlined in <head>): stored choice wins, otherwise
-// the OS colour scheme picks between the night and day editions.
-export const themeInitScript = `(function(){try{var k=${JSON.stringify(
-  STORAGE_KEY,
-)},ids=${JSON.stringify(
+// Sections every theme exposes, so a theme switch can land the reader on the
+// section they were already reading. The classic theme predates the shared
+// ids, hence the aliases.
+export const SECTIONS: string[][] = [
+  ["work", "experience"],
+  ["projects"],
+  ["stack", "skills"],
+  ["contact"],
+];
+
+// Runs before first paint (inlined in <head>): a stored choice wins, otherwise
+// it's the classic site.
+export const themeInitScript = `(function(){var d=${JSON.stringify(
+  DEFAULT_THEME,
+)};try{var t=localStorage.getItem(${JSON.stringify(STORAGE_KEY)});document.documentElement.dataset.theme=${JSON.stringify(
   THEMES.map((t) => t.id),
-)},t=localStorage.getItem(k);if(ids.indexOf(t)<0)t=matchMedia("(prefers-color-scheme: dark)").matches?"night":"quarterly";document.documentElement.dataset.theme=t}catch(e){document.documentElement.dataset.theme="quarterly"}})()`;
+)}.indexOf(t)<0?d:t}catch(e){document.documentElement.dataset.theme=d}})()`;

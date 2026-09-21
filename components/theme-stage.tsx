@@ -10,7 +10,7 @@ import {
   type ReactNode,
 } from "react";
 import { flushSync } from "react-dom";
-import { SECTION_IDS, STORAGE_KEY, THEMES, type ThemeId } from "@/lib/themes";
+import { DEFAULT_THEME, SECTIONS, STORAGE_KEY, THEMES, type ThemeId } from "@/lib/themes";
 import { preparePixelReveal } from "@/lib/pixel-reveal";
 
 type Origin = { x: number; y: number };
@@ -28,13 +28,15 @@ export function useTheme() {
   return ctx;
 }
 
-// The section the reader is currently in, if any.
-function currentSection(): string | null {
-  let found: string | null = null;
-  for (const id of SECTION_IDS) {
-    const el = document.getElementById(id);
-    if (el && el.getBoundingClientRect().top <= 160) found = id;
-  }
+const findSection = (ids: string[]) => ids.map((id) => document.getElementById(id)).find(Boolean);
+
+// The section the reader is currently in, if any (as an index into SECTIONS).
+function currentSection(): number | null {
+  let found: number | null = null;
+  SECTIONS.forEach((ids, i) => {
+    const el = findSection(ids);
+    if (el && el.getBoundingClientRect().top <= 160) found = i;
+  });
   return found;
 }
 
@@ -49,7 +51,7 @@ export function ThemeStage({ panels }: { panels: Record<ThemeId, ReactNode> }) {
 
   useEffect(() => {
     const fromDom = document.documentElement.dataset.theme as ThemeId | undefined;
-    setActive(THEMES.some((t) => t.id === fromDom) ? fromDom! : "quarterly");
+    setActive(THEMES.some((t) => t.id === fromDom) ? fromDom! : DEFAULT_THEME);
   }, []);
 
   // Duplicate ids are gone once pruned, so honour a #hash from the initial load.
@@ -67,7 +69,7 @@ export function ThemeStage({ panels }: { panels: Record<ThemeId, ReactNode> }) {
     const apply = () => {
       flushSync(() => setActive(id));
       root.dataset.theme = id;
-      const target = section && document.getElementById(section);
+      const target = section !== null && findSection(SECTIONS[section]);
       if (target) target.scrollIntoView({ behavior: "instant" });
       else window.scrollTo({ top: 0, behavior: "instant" });
     };
@@ -86,7 +88,7 @@ export function ThemeStage({ panels }: { panels: Record<ThemeId, ReactNode> }) {
   }, []);
 
   const value = useMemo(
-    () => ({ theme: active ?? "quarterly", setTheme }),
+    () => ({ theme: active ?? DEFAULT_THEME, setTheme }),
     [active, setTheme],
   );
 

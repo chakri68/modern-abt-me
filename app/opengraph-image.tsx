@@ -24,7 +24,7 @@ const ROWS = Math.ceil(size.height / CELL);
 function universe(generations: number) {
   let s = 68;
   const rand = () => ((s = (s * 1664525 + 1013904223) % 4294967296) / 4294967296);
-  let grid = Array.from({ length: COLS * ROWS }, () => (rand() < 0.32 ? 2 : 0));
+  let grid: number[] = Array.from({ length: COLS * ROWS }, () => (rand() < 0.32 ? 2 : 0));
   for (let g = 0; g < generations; g++) {
     grid = grid.map((v, i) => {
       const x = i % COLS;

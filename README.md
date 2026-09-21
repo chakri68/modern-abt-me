@@ -4,11 +4,12 @@ _Just another portfolio on the internet. This one’s mine_
 
 ## themes
 
-couldn't pick one design, so it ships eight. the switcher is in every nav.
+couldn't pick one design, so it ships nine. the switcher is in every nav.
 
 | theme | what it is |
 | --- | --- |
-| night / day edition | a broadsheet and its magazine sibling. default, follows your OS colour scheme. the night one has Conway's Game of Life where the front-page photo should be |
+| classic | the original site, untouched. the default |
+| night / day edition | a broadsheet and its magazine sibling. the night one has Conway's Game of Life where the front-page photo should be |
 | paperback | preface, chapters, glossary |
 | preprint | not peer reviewed, the peers were busy |
 | release notes | semver for a person. new employer = major bump |
@@ -18,11 +19,11 @@ couldn't pick one design, so it ships eight. the switcher is in every nav.
 
 how it moves:
 
-- facts live in `lib/content.ts`. themes (`themes/*.tsx`) only own layout and voice, so fixing a typo fixes it eight times.
-- the site is a static export, so there's no server to pick a theme. all eight are rendered into the HTML and CSS shows the one matching `<html data-theme>`, which an inline script sets before first paint. no flash.
-- after hydration `ThemeStage` unmounts the other seven, which also gets rid of the duplicate `#work` anchors.
+- facts live in `lib/content.ts`. themes (`themes/*.tsx`) only own layout and voice, so fixing a typo fixes it eight times. (classic is the exception: it predates the content module and keeps its copy inside `components/*-section.tsx`.)
+- the site is a static export, so there's no server to pick a theme. all nine are rendered into the HTML and CSS shows the one matching `<html data-theme>`, which an inline script sets before first paint. no flash.
+- after hydration `ThemeStage` unmounts the other eight, which also gets rid of the duplicate `#work` anchors.
 - switching uses the View Transitions API with a pixel dissolve: the new theme's snapshot is masked by 14 stacked one-pixel-per-cell images (`lib/pixel-reveal.ts`), stepped into place one by one. a cell's layer = distance from the switcher + noise, so the pixels spread out from where you clicked. no support or `prefers-reduced-motion` → it just swaps.
 - the dropdown is portaled to `<body>`, so it's dressed by `--ts-*` tokens set per `html[data-theme]` in `globals.css`.
 - fonts for non-default themes are declared with `preload: false`; the browser only fetches them when a theme that uses them is actually on screen.
 
-adding a theme: a component in `themes/`, an entry in `lib/themes.ts`, a panel in `app/page.tsx`, a token block + one selector in `globals.css`. keep the section ids (`work`, `projects`, `stack`, `contact`) so switching keeps your place.
+adding a theme: a component in `themes/`, an entry in `lib/themes.ts`, a panel in `app/page.tsx`, a token block + one selector in `globals.css`. keep the section ids (`work`, `projects`, `stack`, `contact`) so switching keeps your place. classic's `#experience` / `#skills` are aliased in `SECTIONS`.

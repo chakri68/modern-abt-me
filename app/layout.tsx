@@ -1,6 +1,7 @@
 import React from "react";
 import type { Metadata } from "next";
 import {
+  Space_Grotesk,
   Instrument_Serif,
   Instrument_Sans,
   DM_Mono,
@@ -18,15 +19,16 @@ import {
 import "./globals.css";
 import { themeInitScript } from "@/lib/themes";
 
-// Only the default (day/night edition) faces are preloaded. The rest are
+// Only the default (classic) theme's faces are preloaded. The rest are
 // declared (next/font wants literal options, hence the repetition) but fetched lazily, when a theme that uses them is actually shown.
-const iserif = Instrument_Serif({ subsets: ["latin"], weight: "400", style: ["normal", "italic"], variable: "--f-iserif" });
-const isans = Instrument_Sans({ subsets: ["latin"], variable: "--f-isans" });
-const dmmono = DM_Mono({ subsets: ["latin"], weight: ["400", "500"], variable: "--f-dmmono" });
+const grotesk = Space_Grotesk({ subsets: ["latin"], variable: "--f-grotesk" });
+const iserif = Instrument_Serif({ subsets: ["latin"], preload: false, weight: "400", style: ["normal", "italic"], variable: "--f-iserif" });
+const isans = Instrument_Sans({ subsets: ["latin"], preload: false, variable: "--f-isans" });
+const dmmono = DM_Mono({ subsets: ["latin"], preload: false, weight: ["400", "500"], variable: "--f-dmmono" });
 const cormorant = Cormorant_Garamond({ subsets: ["latin"], preload: false, weight: ["500", "600"], style: ["normal", "italic"], variable: "--f-cormorant" });
 const garamond = EB_Garamond({ subsets: ["latin"], preload: false, style: ["normal", "italic"], variable: "--f-garamond" });
 const stix = STIX_Two_Text({ subsets: ["latin"], preload: false, style: ["normal", "italic"], variable: "--f-stix" });
-const jbmono = JetBrains_Mono({ subsets: ["latin"], preload: false, variable: "--f-jbmono" });
+const jbmono = JetBrains_Mono({ subsets: ["latin"], variable: "--f-jbmono" });
 const newsreader = Newsreader({ subsets: ["latin"], preload: false, style: ["normal", "italic"], variable: "--f-newsreader" });
 const rozha = Rozha_One({ subsets: ["latin"], preload: false, weight: "400", variable: "--f-rozha" });
 const courier = Courier_Prime({ subsets: ["latin"], preload: false, weight: ["400", "700"], style: ["normal", "italic"], variable: "--f-courier" });
@@ -35,7 +37,7 @@ const caslont = Libre_Caslon_Text({ subsets: ["latin"], preload: false, weight: 
 const spectral = Spectral({ subsets: ["latin"], preload: false, weight: ["400", "500", "600"], style: ["normal", "italic"], variable: "--f-spectral" });
 
 const fontVars = [
-  iserif, isans, dmmono, cormorant, garamond, stix, jbmono,
+  grotesk, iserif, isans, dmmono, cormorant, garamond, stix, jbmono,
   newsreader, rozha, courier, caslond, caslont, spectral,
 ]
   .map((f) => f.variable)
