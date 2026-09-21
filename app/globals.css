@@ -439,7 +439,9 @@ html[data-theme="letter"] {
   }
 }
 
-/* Switching themes: the new one grows out of the switcher like an ink blot. */
+/* Switching themes: the new one dissolves in pixel by pixel, spreading out
+   from the switcher. lib/pixel-reveal.ts paints the mask layers (--px-mask)
+   and the px-reveal keyframes that step them into place. */
 ::view-transition-old(root),
 ::view-transition-new(root) {
   animation: none;
@@ -450,15 +452,11 @@ html[data-theme="letter"] {
 }
 ::view-transition-new(root) {
   z-index: 1;
-  animation: theme-reveal 0.75s cubic-bezier(0.65, 0, 0.2, 1);
-}
-@keyframes theme-reveal {
-  from {
-    clip-path: circle(0 at var(--vt-x, 50%) var(--vt-y, 0));
-  }
-  to {
-    clip-path: circle(150vmax at var(--vt-x, 50%) var(--vt-y, 0));
-  }
+  mask-image: var(--px-mask);
+  mask-size: 100% 100%;
+  mask-repeat: no-repeat;
+  image-rendering: pixelated;
+  animation: px-reveal 0.95s step-end both;
 }
 
 @media (prefers-reduced-motion: reduce) {

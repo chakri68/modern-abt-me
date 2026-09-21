@@ -11,6 +11,7 @@ import {
 } from "react";
 import { flushSync } from "react-dom";
 import { SECTION_IDS, STORAGE_KEY, THEMES, type ThemeId } from "@/lib/themes";
+import { preparePixelReveal } from "@/lib/pixel-reveal";
 
 type Origin = { x: number; y: number };
 
@@ -80,8 +81,7 @@ export function ThemeStage({ panels }: { panels: Record<ThemeId, ReactNode> }) {
     const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (!document.startViewTransition || reduced) return apply();
 
-    root.style.setProperty("--vt-x", `${origin?.x ?? innerWidth / 2}px`);
-    root.style.setProperty("--vt-y", `${origin?.y ?? 0}px`);
+    preparePixelReveal(origin ?? { x: innerWidth / 2, y: 0 });
     document.startViewTransition(apply);
   }, []);
 

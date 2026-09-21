@@ -21,7 +21,7 @@ how it moves:
 - facts live in `lib/content.ts`. themes (`themes/*.tsx`) only own layout and voice, so fixing a typo fixes it eight times.
 - the site is a static export, so there's no server to pick a theme. all eight are rendered into the HTML and CSS shows the one matching `<html data-theme>`, which an inline script sets before first paint. no flash.
 - after hydration `ThemeStage` unmounts the other seven, which also gets rid of the duplicate `#work` anchors.
-- switching uses the View Transitions API: the new theme grows out of the switcher as a circle. no support or `prefers-reduced-motion` → it just swaps.
+- switching uses the View Transitions API with a pixel dissolve: the new theme's snapshot is masked by 14 stacked one-pixel-per-cell images (`lib/pixel-reveal.ts`), stepped into place one by one. a cell's layer = distance from the switcher + noise, so the pixels spread out from where you clicked. no support or `prefers-reduced-motion` → it just swaps.
 - the dropdown is portaled to `<body>`, so it's dressed by `--ts-*` tokens set per `html[data-theme]` in `globals.css`.
 - fonts for non-default themes are declared with `preload: false`; the browser only fetches them when a theme that uses them is actually on screen.
 
