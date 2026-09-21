@@ -1,0 +1,104 @@
+"use client";
+
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+  type ReactNode,
+} from "react";
+import { flushSync } from "react-dom";
+import { SECTION_IDS, STORAGE_KEY, THEMES, type ThemeId } from "@/lib/themes";
+
+type Origin = { x: number; y: number };
+
+type ThemeContextValue = {
+  theme: ThemeId;
+  setTheme: (id: ThemeId, origin?: Origin) => void;
+};
+
+const ThemeContext = createContext<ThemeContextValue | null>(null);
+
+export function useTheme() {
+  const ctx = useContext(ThemeContext);
+  if (!ctx) throw new Error("useTheme must be used inside <ThemeStage>");
+  return ctx;
+}
+
+// The section the reader is currently in, if any.
+function currentSection(): string | null {
+  let found: string | null = null;
+  for (const id of SECTION_IDS) {
+    const el = document.getElementById(id);
+    if (el && el.getBoundingClientRect().top <= 160) found = id;
+  }
+  return found;
+}
+
+/**
+ * Every theme is server-rendered into the page and CSS shows the one matching
+ * <html data-theme>, so the right theme paints before hydration with no flash.
+ * After mount we keep only the active panel in the tree, which also gets rid
+ * of the duplicate section ids.
+ */
+export function ThemeStage({ panels }: { panels: Record<ThemeId, ReactNode> }) {
+  const [active, setActive] = useState<ThemeId | null>(null);
+
+  useEffect(() => {
+    const fromDom = document.documentElement.dataset.theme as ThemeId | undefined;
+    setActive(THEMES.some((t) => t.id === fromDom) ? fromDom! : "quarterly");
+  }, []);
+
+  // Duplicate ids are gone once pruned, so honour a #hash from the initial load.
+  useEffect(() => {
+    if (!active || !location.hash) return;
+    document.getElementById(location.hash.slice(1))?.scrollIntoView({ behavior: "instant" });
+    // only on the first prune
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [active === null]);
+
+  const setTheme = useCallback((id: ThemeId, origin?: Origin) => {
+    const section = currentSection();
+    const root = document.documentElement;
+
+    const apply = () => {
+      flushSync(() => setActive(id));
+      root.dataset.theme = id;
+      const target = section && document.getElementById(section);
+      if (target) target.scrollIntoView({ behavior: "instant" });
+      else window.scrollTo({ top: 0, behavior: "instant" });
+    };
+
+    try {
+      localStorage.setItem(STORAGE_KEY, id);
+    } catch {
+      // private mode etc. the switch still works for this visit
+    }
+
+    const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!document.startViewTransition || reduced) return apply();
+
+    root.style.setProperty("--vt-x", `${origin?.x ?? innerWidth / 2}px`);
+    root.style.setProperty("--vt-y", `${origin?.y ?? 0}px`);
+    document.startViewTransition(apply);
+  }, []);
+
+  const value = useMemo(
+    () => ({ theme: active ?? "quarterly", setTheme }),
+    [active, setTheme],
+  );
+
+  return (
+    <ThemeContext.Provider value={value}>
+      {THEMES.map((t) =>
+        active === null || active === t.id ? (
+          <div key={t.id} data-theme-panel={t.id}>
+            {panels[t.id]}
+          </div>
+        ) : null,
+      )}
+    </ThemeContext.Provider>
+  );
+}

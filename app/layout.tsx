@@ -1,16 +1,45 @@
 import React from "react";
 import type { Metadata } from "next";
-import { Space_Grotesk, JetBrains_Mono } from "next/font/google";
+import {
+  Instrument_Serif,
+  Instrument_Sans,
+  DM_Mono,
+  Cormorant_Garamond,
+  EB_Garamond,
+  STIX_Two_Text,
+  JetBrains_Mono,
+  Newsreader,
+  Rozha_One,
+  Courier_Prime,
+  Libre_Caslon_Display,
+  Libre_Caslon_Text,
+  Spectral,
+} from "next/font/google";
 import "./globals.css";
+import { themeInitScript } from "@/lib/themes";
 
-const _spaceGrotesk = Space_Grotesk({
-  subsets: ["latin"],
-  variable: "--font-sans",
-});
-const _jetbrainsMono = JetBrains_Mono({
-  subsets: ["latin"],
-  variable: "--font-mono",
-});
+// Only the default (day/night edition) faces are preloaded. The rest are
+// declared (next/font wants literal options, hence the repetition) but fetched lazily, when a theme that uses them is actually shown.
+const iserif = Instrument_Serif({ subsets: ["latin"], weight: "400", style: ["normal", "italic"], variable: "--f-iserif" });
+const isans = Instrument_Sans({ subsets: ["latin"], variable: "--f-isans" });
+const dmmono = DM_Mono({ subsets: ["latin"], weight: ["400", "500"], variable: "--f-dmmono" });
+const cormorant = Cormorant_Garamond({ subsets: ["latin"], preload: false, weight: ["500", "600"], style: ["normal", "italic"], variable: "--f-cormorant" });
+const garamond = EB_Garamond({ subsets: ["latin"], preload: false, style: ["normal", "italic"], variable: "--f-garamond" });
+const stix = STIX_Two_Text({ subsets: ["latin"], preload: false, style: ["normal", "italic"], variable: "--f-stix" });
+const jbmono = JetBrains_Mono({ subsets: ["latin"], preload: false, variable: "--f-jbmono" });
+const newsreader = Newsreader({ subsets: ["latin"], preload: false, style: ["normal", "italic"], variable: "--f-newsreader" });
+const rozha = Rozha_One({ subsets: ["latin"], preload: false, weight: "400", variable: "--f-rozha" });
+const courier = Courier_Prime({ subsets: ["latin"], preload: false, weight: ["400", "700"], style: ["normal", "italic"], variable: "--f-courier" });
+const caslond = Libre_Caslon_Display({ subsets: ["latin"], preload: false, weight: "400", variable: "--f-caslond" });
+const caslont = Libre_Caslon_Text({ subsets: ["latin"], preload: false, weight: ["400", "700"], style: ["normal", "italic"], variable: "--f-caslont" });
+const spectral = Spectral({ subsets: ["latin"], preload: false, weight: ["400", "500", "600"], style: ["normal", "italic"], variable: "--f-spectral" });
+
+const fontVars = [
+  iserif, isans, dmmono, cormorant, garamond, stix, jbmono,
+  newsreader, rozha, courier, caslond, caslont, spectral,
+]
+  .map((f) => f.variable)
+  .join(" ");
 
 const siteUrl = "https://chakri.me";
 const description =
@@ -128,8 +157,9 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="en">
+    <html lang="en" className={fontVars} suppressHydrationWarning>
       <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
         <script
           defer
           src="https://static.cloudflareinsights.com/beacon.min.js"
@@ -140,7 +170,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className={`font-sans antialiased`}>{children}</body>
+      <body className="font-sans antialiased">{children}</body>
     </html>
   );
 }

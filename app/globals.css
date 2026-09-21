@@ -76,9 +76,21 @@
 }
 
 @theme inline {
-  --font-sans: "Space Grotesk", "Space Grotesk Fallback", system-ui, sans-serif;
-  --font-serif: "Instrument Serif", "Georgia", serif;
-  --font-mono: "JetBrains Mono", "Geist Mono", monospace;
+  --font-sans: var(--f-isans), system-ui, sans-serif;
+  --font-mono: var(--f-dmmono), ui-monospace, monospace;
+  --font-iserif: var(--f-iserif), Georgia, serif;
+  --font-isans: var(--f-isans), system-ui, sans-serif;
+  --font-dmmono: var(--f-dmmono), ui-monospace, monospace;
+  --font-cormorant: var(--f-cormorant), Georgia, serif;
+  --font-garamond: var(--f-garamond), Georgia, serif;
+  --font-stix: var(--f-stix), "Times New Roman", serif;
+  --font-jbmono: var(--f-jbmono), ui-monospace, monospace;
+  --font-newsreader: var(--f-newsreader), Georgia, serif;
+  --font-rozha: var(--f-rozha), Georgia, serif;
+  --font-courier: var(--f-courier), "Courier New", monospace;
+  --font-caslond: var(--f-caslond), Georgia, serif;
+  --font-caslont: var(--f-caslont), Georgia, serif;
+  --font-spectral: var(--f-spectral), Georgia, serif;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -123,19 +135,345 @@
   }
   html {
     scroll-behavior: smooth;
-    scroll-snap-type: y proximity;
+    scroll-padding-top: 1.5rem;
     overflow-y: scroll;
+    scrollbar-color: grey transparent;
+    scrollbar-width: thin;
+    background: var(--page-bg);
   }
   body {
-    @apply bg-background text-foreground;
-  }
-  ::selection {
-    background: oklch(0.85 0.06 75 / 0.3);
+    background: var(--page-bg);
+    color: var(--ts-fg);
   }
 }
 
-html {
-  cursor: default;
-  scrollbar-color: grey transparent;
-  scrollbar-width: thin;
+/* ---------------------------------------------------------------------------
+   Themes
+
+   Every theme is rendered into the page; the one matching <html data-theme>
+   is shown. The inline script in <head> sets data-theme before first paint.
+   Without JS we fall back on the OS colour scheme.
+--------------------------------------------------------------------------- */
+
+[data-theme-panel] {
+  display: none;
+}
+html[data-theme="night"] [data-theme-panel="night"],
+html[data-theme="quarterly"] [data-theme-panel="quarterly"],
+html[data-theme="paperback"] [data-theme-panel="paperback"],
+html[data-theme="preprint"] [data-theme-panel="preprint"],
+html[data-theme="changelog"] [data-theme-panel="changelog"],
+html[data-theme="zine"] [data-theme-panel="zine"],
+html[data-theme="encyclopaedia"] [data-theme-panel="encyclopaedia"],
+html[data-theme="letter"] [data-theme-panel="letter"],
+html:not([data-theme]) [data-theme-panel="quarterly"] {
+  display: block;
+}
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme]) [data-theme-panel="quarterly"] {
+    display: none;
+  }
+  html:not([data-theme]) [data-theme-panel="night"] {
+    display: block;
+  }
+}
+
+/* Tokens for the page ground and the theme switcher menu, one set per theme.
+   The menu is portaled to <body>, so these have to live on <html>. */
+html,
+html[data-theme="quarterly"] {
+  --page-bg: #f4efe6;
+  --ts-bg: #f4efe6;
+  --ts-fg: #1a1714;
+  --ts-muted: #5c5348;
+  --ts-border: 1px solid #1a1714;
+  --ts-accent: #b02a14;
+  --ts-accent-fg: #ffffff;
+  --ts-font: var(--f-dmmono), serif;
+  --ts-size: 12px;
+  --ts-transform: uppercase;
+  --ts-tracking: 0.06em;
+  --ts-radius: 0px;
+  --ts-shadow: 0 18px 40px -18px rgb(26 23 20 / 0.35);
+  --ts-hint-font: var(--f-iserif), serif;
+  --ts-hint-style: italic;
+  --ts-hint-size: 15px;
+  --selection: rgb(176 42 20 / 0.22);
+}
+html[data-theme="night"] {
+  --page-bg: #12100e;
+  --ts-bg: #12100e;
+  --ts-fg: #f1eadd;
+  --ts-muted: #a69c8c;
+  --ts-border: 1px solid #f1eadd;
+  --ts-accent: #e8553a;
+  --ts-accent-fg: #12100e;
+  --ts-shadow: 0 18px 50px -12px rgb(0 0 0 / 0.8);
+  --selection: rgb(232 85 58 / 0.35);
+}
+html[data-theme="paperback"] {
+  --page-bg: #f1e8d3;
+  --ts-bg: #f1e8d3;
+  --ts-fg: #211c16;
+  --ts-muted: #5a5043;
+  --ts-border: 1px solid #211c16;
+  --ts-accent: #1e4d40;
+  --ts-accent-fg: #f1e8d3;
+  --ts-font: var(--f-garamond), serif;
+  --ts-size: 14px;
+  --ts-tracking: 0.14em;
+  --ts-hint-font: var(--f-cormorant), serif;
+  --ts-hint-size: 17px;
+  --selection: rgb(30 77 64 / 0.22);
+}
+html[data-theme="preprint"] {
+  --page-bg: #faf7f0;
+  --ts-bg: #faf7f0;
+  --ts-fg: #1b1a17;
+  --ts-muted: #4a463e;
+  --ts-border: 1px solid #1b1a17;
+  --ts-accent: #8c1d18;
+  --ts-font: var(--f-stix), serif;
+  --ts-size: 16px;
+  --ts-transform: none;
+  --ts-tracking: 0;
+  --ts-hint-font: var(--f-stix), serif;
+  --ts-hint-size: 14px;
+  --selection: rgb(140 29 24 / 0.2);
+}
+html[data-theme="changelog"] {
+  --page-bg: #f2efe9;
+  --ts-bg: #f2efe9;
+  --ts-fg: #171717;
+  --ts-muted: #5b574f;
+  --ts-border: 1px solid #171717;
+  --ts-accent: #2b3fe0;
+  --ts-font: var(--f-jbmono), serif;
+  --ts-size: 13px;
+  --ts-transform: lowercase;
+  --ts-tracking: 0;
+  --ts-hint-font: var(--f-newsreader), serif;
+  --ts-hint-size: 15px;
+  --selection: rgb(43 63 224 / 0.2);
+}
+html[data-theme="zine"] {
+  --page-bg: #f3ede0;
+  --ts-bg: #f3ede0;
+  --ts-fg: #16206b;
+  --ts-muted: #16206b;
+  --ts-border: 3px solid #2438b8;
+  --ts-accent: #2438b8;
+  --ts-accent-fg: #f3ede0;
+  --ts-font: var(--f-courier), serif;
+  --ts-size: 14px;
+  --ts-weight: 700;
+  --ts-tracking: 0.04em;
+  /* the menu gets its own misregistered second ink */
+  --ts-shadow: 7px 7px 0 #f0563f;
+  --ts-hint-font: var(--f-courier), serif;
+  --ts-hint-size: 12px;
+  --selection: rgb(240 86 63 / 0.4);
+}
+html[data-theme="encyclopaedia"] {
+  --page-bg: #f5f0e4;
+  --ts-bg: #f5f0e4;
+  --ts-fg: #1c1a17;
+  --ts-muted: #5a5347;
+  --ts-border: 3px double #1c1a17;
+  --ts-accent: #7a1f1f;
+  --ts-accent-fg: #f5f0e4;
+  --ts-font: var(--f-caslont), serif;
+  --ts-size: 13px;
+  --ts-tracking: 0.16em;
+  --ts-hint-font: var(--f-caslont), serif;
+  --ts-hint-size: 13px;
+  --selection: rgb(122 31 31 / 0.2);
+}
+html[data-theme="letter"] {
+  --page-bg: #fbf7ee;
+  --ts-bg: #fbf7ee;
+  --ts-fg: #1e1b16;
+  --ts-muted: #5e574b;
+  --ts-border: 1px solid #1e1b16;
+  --ts-accent: #9a3412;
+  --ts-hint-font: var(--f-spectral), serif;
+  --ts-hint-size: 15px;
+  --selection: rgb(154 52 18 / 0.2);
+}
+
+::selection {
+  background: var(--selection);
+}
+
+/* Theme switcher --------------------------------------------------------- */
+
+.ts-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  min-height: 44px;
+  padding: 0 0.2em;
+  color: inherit;
+  font-family: var(--ts-font);
+  font-size: var(--ts-size);
+  font-weight: var(--ts-weight, 400);
+  letter-spacing: var(--ts-tracking);
+  text-transform: var(--ts-transform);
+  cursor: pointer;
+  white-space: nowrap;
+}
+.ts-trigger:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 4px;
+}
+.ts-trigger-label {
+  opacity: 0.65;
+}
+.ts-trigger-value {
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 1px;
+}
+.ts-chevron {
+  width: 0.85em;
+  height: 0.85em;
+  transition: transform 0.3s cubic-bezier(0.3, 1.4, 0.5, 1);
+}
+
+.ts-menu {
+  z-index: 100;
+  min-width: 300px;
+  max-width: calc(100vw - 24px);
+  padding: 6px;
+  background: var(--ts-bg);
+  color: var(--ts-fg);
+  border: var(--ts-border);
+  border-radius: var(--ts-radius);
+  box-shadow: var(--ts-shadow);
+  font-family: var(--ts-font);
+  font-size: var(--ts-size);
+  font-weight: var(--ts-weight, 400);
+  letter-spacing: var(--ts-tracking);
+  text-transform: var(--ts-transform);
+  transform-origin: var(--radix-dropdown-menu-content-transform-origin);
+  animation: ts-menu-in 0.32s cubic-bezier(0.2, 0.9, 0.3, 1.15);
+}
+.ts-menu[data-state="closed"] {
+  animation: ts-menu-out 0.14s ease-in forwards;
+}
+.ts-menu-label {
+  padding: 8px 10px 10px;
+  color: var(--ts-muted);
+  border-bottom: var(--ts-border);
+  margin-bottom: 6px;
+}
+.ts-item {
+  display: grid;
+  grid-template-columns: 14px auto 1fr;
+  align-items: baseline;
+  column-gap: 10px;
+  min-height: 44px;
+  padding: 10px;
+  cursor: pointer;
+  outline: none;
+  opacity: 0;
+  animation: ts-item-in 0.3s cubic-bezier(0.2, 0.8, 0.3, 1) forwards;
+}
+.ts-item-mark {
+  width: 8px;
+  height: 8px;
+  align-self: center;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  transition: background 0.2s, transform 0.3s cubic-bezier(0.3, 1.6, 0.5, 1);
+}
+.ts-item[data-state="checked"] .ts-item-mark {
+  background: var(--ts-accent);
+  border-color: var(--ts-accent);
+  transform: scale(1.35);
+}
+.ts-item-hint {
+  justify-self: end;
+  text-align: right;
+  color: var(--ts-muted);
+  font-family: var(--ts-hint-font);
+  font-style: var(--ts-hint-style, italic);
+  font-size: var(--ts-hint-size);
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
+}
+.ts-item[data-highlighted] {
+  background: var(--ts-accent);
+  color: var(--ts-accent-fg);
+}
+.ts-item[data-highlighted] .ts-item-hint {
+  color: inherit;
+}
+.ts-item[data-highlighted] .ts-item-mark {
+  border-color: currentColor;
+}
+.ts-item[data-highlighted][data-state="checked"] .ts-item-mark {
+  background: currentColor;
+}
+
+@keyframes ts-menu-in {
+  from {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.96);
+  }
+}
+@keyframes ts-menu-out {
+  to {
+    opacity: 0;
+    transform: translateY(-4px) scale(0.98);
+  }
+}
+@keyframes ts-item-in {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Switching themes: the new one grows out of the switcher like an ink blot. */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+::view-transition-old(root) {
+  z-index: 0;
+}
+::view-transition-new(root) {
+  z-index: 1;
+  animation: theme-reveal 0.75s cubic-bezier(0.65, 0, 0.2, 1);
+}
+@keyframes theme-reveal {
+  from {
+    clip-path: circle(0 at var(--vt-x, 50%) var(--vt-y, 0));
+  }
+  to {
+    clip-path: circle(150vmax at var(--vt-x, 50%) var(--vt-y, 0));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .ts-menu,
+  .ts-item {
+    animation: none;
+    opacity: 1;
+  }
+}
+
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
 }
